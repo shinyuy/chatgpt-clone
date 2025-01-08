@@ -178,7 +178,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
                 {messages.length > 0 && messages.map((msg, i) => {
 
                     if (msg.children.length > 0) {
-                        return <TextBlock key={i} text={msg.children[index].text} parent_message_id={msg.children[index].parent_message_id} response={msg.children[index].response} loading={loading} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.children[index].id} childMessages={msg.children} index={index} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} />
+                        return <TextBlock key={i} text={msg.children[index]?.text} parent_message_id={msg.children[index]?.parent_message_id} response={msg.children[index]?.response} loading={loading} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.children[index]?.id} childMessages={msg.children} index={index} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} />
                     } else {
                         return <TextBlock key={i} text={msg.parent.text} response={msg.parent.response} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.parent.id} childMessages={null} index={null} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} parent_message_id={undefined} loading={undefined} />
                     }
