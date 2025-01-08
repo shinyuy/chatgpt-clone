@@ -7,6 +7,15 @@ First, clone git repository, install dependencies and run app:
 ```bash
 git clone https://github.com/shinyuy/chatgpt-clone
 cd chatgpt-clone
+```
+
+Set env variables by:
+Creating a .env.local file with the following variables
+NEXT_PUBLIC_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_KEY
+NEXT_PUBLIC_HUGGINGFACE_API_KEY (I use Huggingface to make a AI API calls)
+
+```bash
 npm install
 npm run dev
 # or
