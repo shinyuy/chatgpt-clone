@@ -7,6 +7,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ selectedConversation, setSelectedConversation }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [conversations, setConversations] = useState<any[]>([]);
 
     useEffect(() => {

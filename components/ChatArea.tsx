@@ -7,12 +7,11 @@ interface ChatAreaProps {
 }
 
 const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [messages, setMessages] = useState<any[]>([]);
     const [input, setInput] = useState<string>('');
     const [editingMessage, setEditingMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const [output, setOutput] = useState<string | null>("")
-    const [parentAndChildMessages, setParentAndChildMessages] = useState([])
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
@@ -25,7 +24,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
                 .eq('conversation_id', conversationId)
                 .order('created_at');
             if (error) console.error(error);
-            else setMessages(data);
+            // else setMessages(data);
 
             const parentAndChildData = data
                 .map((msg) => {
@@ -50,7 +49,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
                 })
                 .filter((entry) => entry !== undefined && entry !== null); // Remove invalid entries
 
-            setParentAndChildMessages(parentAndChildData)
+            setMessages(parentAndChildData)
         };
 
         fetchMessages();
@@ -58,7 +57,6 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
 
     const callHuggingFaceAPI = async (question: string) => {
         setLoading(true);
-        setOutput(null);
 
         const apiUrl = "https://api-inference.huggingface.co/models/gpt2";
         const apiKey = process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY;
@@ -80,11 +78,9 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
             }
 
             const result = await response.json();
-            setOutput(result[0]?.generated_text || "No output from model");
             return result[0]?.generated_text
         } catch (error) {
             console.error(error);
-            setOutput("Error calling the Hugging Face API.");
         } finally {
             setLoading(false);
         }
@@ -175,11 +171,11 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
         setEditingMessage(null);
     };
 
-    console.log(parentAndChildMessages)
+
     return (
         <div className="ml-64 flex flex-col flex-1 bg-white items-center">
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {parentAndChildMessages.length > 0 && parentAndChildMessages.map((msg, i) => {
+                {messages.length > 0 && messages.map((msg, i) => {
 
                     if (msg.children.length > 0) {
                         return <TextBlock key={i} text={msg.children[index].text} parent_message_id={msg.children[index].parent_message_id} response={msg.children[index].response} loading={loading} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.children[index].id} children={msg.children} index={index} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} />
