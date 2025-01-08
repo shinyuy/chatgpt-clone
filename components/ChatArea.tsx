@@ -175,12 +175,12 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
     return (
         <div className="ml-64 flex flex-col flex-1 bg-white items-center">
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                {messages.length > 0 && messages.map((msg, i) => {
+                {messages?.length > 0 && messages.map((msg, i) => {
 
-                    if (msg.children.length > 0) {
+                    if (msg?.children?.length > 0) {
                         return <TextBlock key={i} text={msg.children[index]?.text} parent_message_id={msg.children[index]?.parent_message_id} response={msg.children[index]?.response} loading={loading} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.children[index]?.id} childMessages={msg.children} index={index} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} />
                     } else {
-                        return <TextBlock key={i} text={msg.parent.text} response={msg.parent.response} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.parent.id} childMessages={null} index={null} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} parent_message_id={undefined} loading={undefined} />
+                        return <TextBlock key={i} text={msg.parent?.text} response={msg.parent?.response} editingMessage={editingMessage} setEditingMessage={setEditingMessage} id={msg.parent?.id} childMessages={null} index={null} setIndex={setIndex} editMessage={editMessage} setInput={setInput} input={input} parent_message_id={undefined} loading={undefined} />
                     }
                 }
                 )}
