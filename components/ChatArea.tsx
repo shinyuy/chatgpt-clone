@@ -132,14 +132,14 @@ const ChatArea: React.FC<ChatAreaProps> = ({ conversationId }) => {
 
     const editMessage = async (id: string, newContent: string) => {
         setLoading(true);
-        const { error } = await supabase.from('messages').update({ edited: true }).eq('id', id);
-        if (error) console.error(error);
+        const { error: updateError } = await supabase.from('messages').update({ edited: true }).eq('id', id);
+        if (updateError) console.error(updateError);
 
-        const { data, error } = await supabase
+        const { data, error: insertError } = await supabase
             .from('messages')
             .insert([{ conversation_id: conversationId, text: newContent, parent_message_id: id }])
             .select('*');
-        if (error) console.error(error);
+        if (insertError) console.error(insertError);
         else setMessages((prev) => [...prev, ...data]);
 
 
