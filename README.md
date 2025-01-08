@@ -2,9 +2,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, clone git repository, install dependencies and run app:
 
 ```bash
+git clone https://github.com/shinyuy/chatgpt-clone
+cd chatgpt-clone
+npm install
 npm run dev
 # or
 yarn dev
