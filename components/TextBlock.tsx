@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextBlock = ({ text, response, editingMessage, parent_message_id, setEditingMessage, id, children, index, setIndex, editMessage, setInput, input, loading }) => {
+const TextBlock = ({ text, response, editingMessage, parent_message_id, setEditingMessage, id, childMessages, index, setIndex, editMessage, setInput, input, loading }) => {
 
     return (
         <div className="flex flex-col space-y-4 w-[50vw]">
@@ -36,9 +36,9 @@ const TextBlock = ({ text, response, editingMessage, parent_message_id, setEditi
                     </div>
 
                     <div className='flex justify-end text-black'>
-                        {children?.length > 0 && (
+                        {childMessages?.length > 0 && (
                             <div>
-                                <span className={`${index > 0 && 'cursor-pointer text-blue-500'}`} onClick={() => index > 0 && setIndex(index - 1)}>prev </span> {index + 1}/{children.length} <span onClick={() => index < children.length - 1 && setIndex(index + 1)} className={`${index < children.length - 1 && 'cursor-pointer text-blue-500'}`}> next</span>
+                                <span className={`${index > 0 && 'cursor-pointer text-blue-500'}`} onClick={() => index > 0 && setIndex(index - 1)}>prev </span> {index + 1}/{childMessages.length} <span onClick={() => index < childMessages.length - 1 && setIndex(index + 1)} className={`${index < childMessages.length - 1 && 'cursor-pointer text-blue-500'}`}> next</span>
                             </div>
                         )}
                     </div>
